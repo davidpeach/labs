@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\ArtistCreditType;
+use App\Events\FoundNowPlaying;
 use App\Http\Integrations\LastFm\LastFm;
 use App\Http\Integrations\LastFm\Requests\GetRecentTracks;
 use App\Models\Album;
@@ -10,6 +11,7 @@ use App\Models\Artist;
 use App\Models\Listen;
 use App\Models\Song;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Cache;
 
 class ImportNewScrobblesCommand extends Command
 {
@@ -40,8 +42,10 @@ class ImportNewScrobblesCommand extends Command
 
         $tracks->each(function (array $track) {
 
-            // TODO: handle now playing.
             if ((bool) data_get($track, '@attr.nowplaying') === true) {
+                Cache::put('now-listening', $track['name'].' by '.$track['artist']['#text'], now()->addMinutes(2));
+                FoundNowPlaying::dispatch();
+
                 return;
             }
 
