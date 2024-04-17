@@ -12,8 +12,10 @@ class GetRecentTracks extends Request
      */
     protected Method $method = Method::GET;
 
-    public function __construct(private int $toTimestamp = 1)
-    {
+    public function __construct(
+        private ?int $fromTimestamp = null,
+        private ?int $toTimestamp = null,
+    ) {
 
     }
 
@@ -27,11 +29,20 @@ class GetRecentTracks extends Request
 
     protected function defaultQuery(): array
     {
-        return [
+        $params = [
             'api_key' => config('services.lastfm.api_key'),
             'format' => 'json',
             'user' => 'david_peach',
-            'to' => $this->toTimestamp,
         ];
+
+        if (! is_null($this->fromTimestamp)) {
+            $params['from'] = $this->fromTimestamp;
+        }
+
+        if (! is_null($this->toTimestamp)) {
+            $params['to'] = $this->toTimestamp;
+        }
+
+        return $params;
     }
 }
