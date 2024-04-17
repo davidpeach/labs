@@ -20,7 +20,7 @@ class NowListeningTo extends Component
         return view('livewire.now-listening-to');
     }
 
-    #[On('echo:testone,FoundNowPlaying')]
+    #[On('echo:listens,FoundNowPlaying')]
     public function nowListening()
     {
         $this->song = Cache::get('now-listening', 'Not listening');
