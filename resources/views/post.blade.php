@@ -1,6 +1,6 @@
 <x-layout>
 <div class="mx-auto prose">
-<h1>{{ $post->title }}</h1>
+<x-page-title :title="$post->title" />
 {!! $post->content !!}
 
 @php

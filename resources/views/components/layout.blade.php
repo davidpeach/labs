@@ -9,7 +9,7 @@
     <body class="py-10 px-5">
         <div class="prose mx-auto">
             <header>
-                <h1 class="text-5xl">David Peach's website</h1>
+                <h1 class="text-8xl">David Peach's website</h1>
             </header>
             <nav>
                 <a href="/">home</a>

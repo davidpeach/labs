@@ -1,5 +1,5 @@
 <section>
-    <h1 class="text-5xl">listens</h1>
+    <x-page-title title="Listens" />
     <livewire:now-listening-to />
     <hr>
     {!! $listens->links() !!}

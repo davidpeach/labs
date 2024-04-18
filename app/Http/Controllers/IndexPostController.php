@@ -10,7 +10,7 @@ class IndexPostController extends Controller
     public function __invoke(Request $request)
     {
         return view('posts', [
-            'posts' => Post::paginate(10),
+            'posts' => Post::orderBy('published_at', 'desc')->paginate(10),
         ]);
     }
 }
