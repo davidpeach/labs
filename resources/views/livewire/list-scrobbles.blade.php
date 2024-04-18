@@ -1,6 +1,8 @@
 <section>
-    <p>listens</p>
+    <h1 class="text-5xl">listens</h1>
     <livewire:now-listening-to />
+    <hr>
+    {!! $listens->links() !!}
     @foreach ($listens as $listen)
         <div wire:key="{{ $listen->id }}">
             <h2>{{ $listen->song->title }}</h2>

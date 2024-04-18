@@ -8,6 +8,8 @@
         @vite('resources/js/app.js')
     </head>
     <body>
+        <main class="prose mx-auto">
         {{ $slot }}
+        </main>
     </body>
 </html>

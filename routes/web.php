@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\IndexPostController;
+use App\Http\Controllers\ShowPostController;
 use App\Livewire\ListScrobbles;
 use App\Models\Listen;
 use App\Models\Post;
@@ -18,3 +20,7 @@ Route::get('post-count', function () {
 });
 
 Route::get('listens', ListScrobbles::class);
+
+Route::get('posts', IndexPostController::class);
+
+Route::get('{post:wp_url}', ShowPostController::class)->where('post', '(.*)');
