@@ -13,5 +13,6 @@ $images = $post->getMedia('inline_images')
 @endforeach
 
 @endunless
+<x-tag-list :tags="$post->tags" />
 </div>
 </x-layout>

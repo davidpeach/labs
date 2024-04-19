@@ -59,46 +59,18 @@ class WordPress
 
     protected function createPost($data)
     {
-        $converter = new HtmlConverter();
-
-        $post = new Post();
-        $post->wp_id = $data->id;
-        $post->user_id = $this->getAuthor($data->_embedded->author);
-        $post->title = $data->title->rendered;
-        $post->slug = $data->slug;
-        $post->wp_url = trim(str_replace('https://davidpeach.me/', '', $data->link), '/');
-        // $post->featured = ($data->sticky) ? 1 : null;
-        $post->excerpt = $data->excerpt->rendered;
-        $post->content = $data->content->rendered;
-        $post->markdown = $converter->convert($data->content->rendered);
-        $post->format = $data->format;
-        $post->status = 'publish';
-        $post->published_at = $this->carbonDate($data->date);
-        $post->created_at = $this->carbonDate($data->date);
-        $post->updated_at = $this->carbonDate($data->modified);
-        $post->category_id = $this->getCategory($data->_embedded->{'wp:term'});
-        $post->save();
-
-        dump($post->content, '===========================');
-        $this->featuredImage($data->_embedded, $post);
-
-        $this->inlineImages($post, $data->content->rendered);
-
-        // $this->syncTags($post, $data->_embedded->{"wp:term"});
-        return $post;
+        return $this->updatePost(new Post(), $data, true);
     }
 
-    protected function updatePost($post, $data)
+    protected function updatePost($post, $data, $inlineImages = false)
     {
         $converter = new HtmlConverter();
 
-        dump($post->content, '===========================');
         $post->wp_id = $data->id;
         $post->user_id = $this->getAuthor($data->_embedded->author);
         $post->title = $data->title->rendered;
         $post->slug = $data->slug;
         $post->wp_url = trim(str_replace('https://davidpeach.me/', '', $data->link), '/');
-        // $post->featured = ($data->sticky) ? 1 : null;
         $post->excerpt = $data->excerpt->rendered;
         $post->content = $data->content->rendered;
         $post->markdown = $converter->convert($data->content->rendered);
@@ -110,11 +82,12 @@ class WordPress
         $post->category_id = $this->getCategory($data->_embedded->{'wp:term'});
         $post->save();
 
-        $post->update(['featured_image' => $this->featuredImage($data->_embedded, $post)]);
+        if ($inlineImages) {
+            $this->inlineImages($post, $data->content->rendered);
+        }
 
-        $this->inlineImages($post, $data->content->rendered);
+        $this->syncTags($post, $data->_embedded->{'wp:term'});
 
-        // $this->syncTags($post, $data->_embedded->{"wp:term"});
         return $post;
     }
 
@@ -205,11 +178,12 @@ class WordPress
         return $cat->id;
     }
 
-    // private function syncTags(Post $post, $tags)
-    // {
-    //     $tags = collect($tags)->collapse()->where('taxonomy', 'post_tag')->pluck('name')->toArray();
-    //     if (count($tags) > 0) {
-    //         $post->setTags($tags);
-    //     }
-    // }
+    private function syncTags(Post $post, $tags)
+    {
+        collect($tags)->collapse()->filter(function ($tag) {
+            return $tag->taxonomy === 'post_tag';
+        })->each(function ($tag) use ($post) {
+            $post->attachTag($tag->name);
+        });
+    }
 }

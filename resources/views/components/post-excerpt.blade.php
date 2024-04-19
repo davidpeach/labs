@@ -5,4 +5,7 @@
     <div>{!! $post->content !!}</div>
     @endif
     <x-excerpt-image :post="$post" />
+    <time>{{ $post->published_at->format('jS F Y') }}</time>
+
+    <x-tag-list :tags="$post->tags"/>
 </article>

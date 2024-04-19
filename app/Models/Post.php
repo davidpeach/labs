@@ -11,10 +11,12 @@ use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Tags\HasTags;
 
 class Post extends Model implements HasMedia
 {
     use HasFactory;
+    use HasTags;
     use InteractsWithMedia;
 
     protected $fillable = [
@@ -31,6 +33,13 @@ class Post extends Model implements HasMedia
         'published_at',
         'markdown',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'published_at' => 'datetime',
+        ];
+    }
 
     protected static function booted(): void
     {
