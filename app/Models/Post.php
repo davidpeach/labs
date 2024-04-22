@@ -41,6 +41,15 @@ class Post extends Model implements HasMedia
         ];
     }
 
+    public function permalink(): Attribute
+    {
+        $prefix = config('app.url').'/notes/';
+
+        return Attribute::make(
+            get: fn () => $prefix.$this->attributes['wp_url'],
+        );
+    }
+
     protected static function booted(): void
     {
         static::saving(function (Post $post) {

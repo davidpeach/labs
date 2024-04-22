@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\IndexNoteController;
 use App\Http\Controllers\ShowPostController;
+use App\Http\Controllers\TagShowController;
 use App\Livewire\ListScrobbles;
 use App\Models\Listen;
 use App\Models\Post;
@@ -22,5 +23,7 @@ Route::get('post-count', function () {
 Route::get('listens', ListScrobbles::class)->name('listen.index');
 
 Route::get('notes', IndexNoteController::class)->name('note.index');
+
+Route::get('tags/{tag:slug}', TagShowController::class)->name('tag.show');
 
 Route::get('/notes/{post:wp_url}', ShowPostController::class)->where('post', '(.*)')->name('note.show');

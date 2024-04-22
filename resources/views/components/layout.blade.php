@@ -102,6 +102,7 @@
             </main>
             <footer class="bg-white" aria-labelledby="footer-heading">
                 <h2 id="footer-heading" class="sr-only">Footer</h2>
+                <x-tag-cloud />
                 <div class="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
                     <div class="xl:grid xl:grid-cols-3 xl:gap-8">
                         <div class="space-y-8">
