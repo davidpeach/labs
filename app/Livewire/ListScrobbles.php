@@ -12,7 +12,7 @@ class ListScrobbles extends Component
 
     public function render()
     {
-        $listens = Listen::orderBy('started_at', 'desc')->paginate(20);
+        $listens = Listen::orderBy('started_at', 'desc')->paginate(40);
 
         return view('livewire.list-scrobbles', [
             'listens' => $listens,
