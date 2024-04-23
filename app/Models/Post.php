@@ -46,7 +46,7 @@ class Post extends Model implements HasMedia
         $prefix = config('app.url').'/notes/';
 
         return Attribute::make(
-            get: fn () => $prefix.$this->attributes['wp_url'],
+            get: fn () => $prefix.($this->attributes['slug']),
         );
     }
 

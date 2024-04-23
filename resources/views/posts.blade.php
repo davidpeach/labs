@@ -1,5 +1,5 @@
 <x-layout>
-<div class="mx-auto prose lg:prose-xl prose-stone max-w-7xl">
+<div class="mx-auto max-w-7xl">
 <x-page-title title="Posts" />
 @livewire('new-posts')
 @foreach($posts as $post)

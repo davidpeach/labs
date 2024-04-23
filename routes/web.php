@@ -26,4 +26,4 @@ Route::get('notes', IndexNoteController::class)->name('note.index');
 
 Route::get('tags/{tag:slug}', TagShowController::class)->name('tag.show');
 
-Route::get('/notes/{post:wp_url}', ShowPostController::class)->where('post', '(.*)')->name('note.show');
+Route::get('/notes/{post:slug}', ShowPostController::class)->where('post', '(.*)')->name('note.show');

@@ -13,7 +13,7 @@
                     <div class="relative flex space-x-3">
                         <div>
                             <span
-                                class="h-8 w-8 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white">
+                                class="h-12 w-12 relative -top-1 rounded-full bg-gray-400 flex items-center justify-center ring-8 ring-white">
                                 <svg class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor"
                                     aria-hidden="true">
                                     <path

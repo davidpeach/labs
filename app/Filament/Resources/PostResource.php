@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PostResource\Pages;
 use App\Models\Post;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\SpatieTagsInput;
 use Filament\Forms\Form;
@@ -20,44 +21,63 @@ class PostResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('wp_id')
-                    ->numeric(),
-                Forms\Components\Select::make('category_id')
-                    ->relationship('category', 'name')
-                    ->required(),
-                SpatieTagsInput::make('tags'),
-                SpatieMediaLibraryFileUpload::make('inline_images')
-                    ->multiple()
-                    ->collection('inline_images'),
-                Forms\Components\TextInput::make('user_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('title')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('slug')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('wp_url')
-                    ->maxLength(255),
-                Forms\Components\FileUpload::make('featured_image')
-                    ->image(),
-                Forms\Components\Textarea::make('excerpt')
-                    ->columnSpanFull(),
-                Forms\Components\Textarea::make('content')
-                    ->columnSpanFull(),
-                Forms\Components\Textarea::make('markdown')
-                    ->columnSpanFull(),
-                Forms\Components\TextInput::make('format')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('status')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\DateTimePicker::make('published_at')
-                    ->required(),
-            ]);
+        return $form->schema([
+            Section::make('Post Details')
+                ->columns(2)
+                ->schema([
+                    Forms\Components\TextInput::make('title')
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('slug')
+                        ->required()
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('wp_url')
+                        ->maxLength(255),
+                    Forms\Components\Select::make('category_id')
+                        ->relationship('category', 'name')
+                        ->required(),
+                    SpatieTagsInput::make('tags')
+                        ->columnSpanFull(),
+                    Forms\Components\Textarea::make('excerpt')
+                        ->columnSpanFull(),
+                    Forms\Components\Textarea::make('markdown')
+                        ->columnSpanFull()
+                        ->rows(10),
+                    Forms\Components\Textarea::make('content')
+                        ->columnSpanFull()
+                        ->rows(10),
+                ])
+                ->collapsible()
+                ->collapsed(),
+            Section::make('Images')
+                ->schema([
+                    SpatieMediaLibraryFileUpload::make('inline_images')
+                        ->multiple()
+                        ->collection('inline_images'),
+                    Forms\Components\FileUpload::make('featured_image')
+                        ->image(),
+                ])
+                ->collapsible()
+                ->collapsed(),
+            Section::make('Meta')
+                ->columns(3)
+                ->schema([
+                    Forms\Components\TextInput::make('user_id')
+                        ->required()
+                        ->numeric(),
+                    Forms\Components\TextInput::make('format')
+                        ->required()
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('status')
+                        ->required()
+                        ->maxLength(255),
+                    Forms\Components\DateTimePicker::make('published_at')
+                        ->required(),
+                    Forms\Components\TextInput::make('wp_id')
+                        ->numeric(),
+                ])
+                ->collapsible()
+                ->collapsed(),
+        ]);
     }
 
     public static function table(Table $table): Table
