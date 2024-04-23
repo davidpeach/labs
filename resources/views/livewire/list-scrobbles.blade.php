@@ -2,11 +2,11 @@
     <x-page-title title="Listens" />
     <livewire:now-listening-to />
     <hr class="my-10">
-    {!! $listens->links() !!}
+    {!! $this->listens->links() !!}
 
     <div class="flow-root my-10">
         <ul role="list" class="-mb-8">
-            @foreach ($listens as $listen)
+            @foreach ($this->listens as $listen)
             <li wire:key="{{ $listen->id }}">
                 <div class="relative pb-8">
                     <span class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
@@ -42,5 +42,5 @@
 
 
 
-    {!! $listens->links() !!}
+    {!! $this->listens->links() !!}
 </section>
