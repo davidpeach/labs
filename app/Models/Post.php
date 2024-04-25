@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\PostKind;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -39,6 +40,7 @@ class Post extends Model implements HasMedia
     protected function casts(): array
     {
         return [
+            'kind' => PostKind::class,
             'published_at' => 'datetime',
         ];
     }

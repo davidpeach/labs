@@ -98,6 +98,8 @@ class PostResource extends Resource
                 //     ->sortable(),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('kind')
+                    ->searchable(),
                 // Tables\Columns\TextColumn::make('slug')
                 //     ->searchable(),
                 // Tables\Columns\TextColumn::make('wp_url')
