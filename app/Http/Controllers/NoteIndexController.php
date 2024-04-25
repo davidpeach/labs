@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\PostKind;
 use Illuminate\Http\Request;
 
-class IndexNoteController extends Controller
+class NoteIndexController extends Controller
 {
     public function __invoke(Request $request)
     {
         return view('posts', [
-            'posts' => Post::orderBy('published_at', 'desc')->paginate(10),
+            'posts' => Post::where('kind', PostKind::NOTE)->orderBy('published_at', 'desc')->paginate(10),
         ]);
     }
 }

@@ -18,10 +18,10 @@
                     <x-partials.nav-item label="Notes" route="note" to="note.index" />
                 </li>
                 <li>
-                    <x-partials.nav-item label="Articles" route="article" />
+                    <x-partials.nav-item label="Articles" route="article" to="article.index" />
                 </li>
                 <li>
-                    <x-partials.nav-item label="Photos" route="photo" />
+                    <x-partials.nav-item label="Photos" route="photo" to="photo.index" />
                 </li>
                 <li>
                     <x-partials.nav-item label="Jams" route="jam" to="jam.index" />

@@ -59,7 +59,7 @@ class Post extends Model implements HasMedia
 
     public function permalink(): Attribute
     {
-        $prefix = config('app.url').'/notes/';
+        $prefix = config('app.url').'/'.$this->kind->getSlugPart().'/';
 
         return Attribute::make(
             get: fn () => $prefix.($this->attributes['slug']),

@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\IndexNoteController;
+use App\Http\Controllers\ArticleIndexController;
 use App\Http\Controllers\JamIndexController;
+use App\Http\Controllers\NoteIndexController;
+use App\Http\Controllers\PhotoIndexController;
 use App\Http\Controllers\ShowPostController;
 use App\Http\Controllers\TagShowController;
 use App\Livewire\ListScrobbles;
@@ -24,8 +26,10 @@ Route::get('post-count', function () {
 Route::get('listens', ListScrobbles::class)->name('listen.index');
 Route::get('jams', JamIndexController::class)->name('jam.index');
 
-Route::get('notes', IndexNoteController::class)->name('note.index');
+Route::get('notes', NoteIndexController::class)->name('note.index');
+Route::get('photos', PhotoIndexController::class)->name('photo.index');
+Route::get('articles', ArticleIndexController::class)->name('article.index');
 
 Route::get('tags/{tag:slug}', TagShowController::class)->name('tag.show');
 
-Route::get('/notes/{post:slug}', ShowPostController::class)->where('post', '(.*)')->name('note.show');
+Route::get('/{kind}/{post:slug}', ShowPostController::class)->where('post', '(.*)')->name('note.show');
