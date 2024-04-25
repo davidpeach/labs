@@ -32,4 +32,4 @@ Route::get('articles', ArticleIndexController::class)->name('article.index');
 
 Route::get('tags/{tag:slug}', TagShowController::class)->name('tag.show');
 
-Route::get('/{kind}/{post:slug}', ShowPostController::class)->where('post', '(.*)')->name('note.show');
+Route::get('/{kind}/{post:slug}', ShowPostController::class)->where('post', '(.*)')->name('post.show');
