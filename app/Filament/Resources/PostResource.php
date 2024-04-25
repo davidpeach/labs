@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PostResource\Pages;
 use App\Models\Post;
+use App\PostKind;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -36,6 +37,8 @@ class PostResource extends Resource
                     Forms\Components\Select::make('category_id')
                         ->relationship('category', 'name')
                         ->required(),
+                    Forms\Components\Select::make('kind')
+                        ->options(PostKind::class),
                     SpatieTagsInput::make('tags')
                         ->columnSpanFull(),
                     Forms\Components\Textarea::make('excerpt')
@@ -47,8 +50,7 @@ class PostResource extends Resource
                         ->columnSpanFull()
                         ->rows(10),
                 ])
-                ->collapsible()
-                ->collapsed(),
+                ->collapsible(),
             Section::make('Images')
                 ->schema([
                     SpatieMediaLibraryFileUpload::make('inline_images')
@@ -85,26 +87,26 @@ class PostResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('wp_id')
-                    ->numeric()
-                    ->sortable(),
+                // Tables\Columns\TextColumn::make('wp_id')
+                //     ->numeric()
+                //     ->sortable(),
                 Tables\Columns\TextColumn::make('category.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('user_id')
-                    ->numeric()
-                    ->sortable(),
+                // Tables\Columns\TextColumn::make('user_id')
+                //     ->numeric()
+                //     ->sortable(),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('slug')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('wp_url')
-                    ->searchable(),
-                Tables\Columns\ImageColumn::make('featured_image'),
-                Tables\Columns\TextColumn::make('format')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('status')
-                    ->searchable(),
+                // Tables\Columns\TextColumn::make('slug')
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('wp_url')
+                //     ->searchable(),
+                // Tables\Columns\ImageColumn::make('featured_image'),
+                // Tables\Columns\TextColumn::make('format')
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('status')
+                //     ->searchable(),
                 Tables\Columns\TextColumn::make('published_at')
                     ->dateTime()
                     ->sortable(),
@@ -121,7 +123,13 @@ class PostResource extends Resource
                 SelectFilter::make('category')->relationship('category', 'name'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->slideOver(),
+                Tables\Actions\Action::make('convert to photo post')
+                    ->slideOver()
+                    ->action(function (Post $record) {
+                        dd($record);
+                    }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -142,7 +150,7 @@ class PostResource extends Resource
         return [
             'index' => Pages\ListPosts::route('/'),
             'create' => Pages\CreatePost::route('/create'),
-            'edit' => Pages\EditPost::route('/{record}/edit'),
+            // 'edit' => Pages\EditPost::route('/{record}/edit'),
         ];
     }
 }

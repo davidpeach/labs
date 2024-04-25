@@ -25,6 +25,7 @@ class Post extends Model implements HasMedia
         'category_id',
         'user_id',
         'title',
+        'kind',
         'slug',
         'featured_image',
         'excerpt',
