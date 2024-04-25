@@ -9,7 +9,7 @@ class JamIndexController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $jams = Jam::paginate(12);
+        $jams = Jam::orderBy('published_at', 'desc')->paginate(12);
 
         return view('jams', [
             'jams' => $jams,
