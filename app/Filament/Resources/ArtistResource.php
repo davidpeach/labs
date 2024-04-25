@@ -42,6 +42,7 @@ class ArtistResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('mbid')
                     ->searchable(),
+                Tables\Columns\ImageColumn::make('avatar'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

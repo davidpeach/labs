@@ -24,7 +24,7 @@
                     <x-partials.nav-item label="Photos" route="photo" />
                 </li>
                 <li>
-                    <x-partials.nav-item label="Jams" route="jam" />
+                    <x-partials.nav-item label="Jams" route="jam" to="jam.index" />
                 </li>
             </ul>
         </li>
