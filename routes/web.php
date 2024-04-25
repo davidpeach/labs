@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\IndexNoteController;
+use App\Http\Controllers\JamIndexController;
 use App\Http\Controllers\ShowPostController;
 use App\Http\Controllers\TagShowController;
 use App\Livewire\ListScrobbles;
@@ -21,6 +22,7 @@ Route::get('post-count', function () {
 });
 
 Route::get('listens', ListScrobbles::class)->name('listen.index');
+Route::get('jams', JamIndexController::class)->name('jam.index');
 
 Route::get('notes', IndexNoteController::class)->name('note.index');
 
