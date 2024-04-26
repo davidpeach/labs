@@ -13,7 +13,7 @@
 
     <div x-data="{showMobileMenu: false}">
 
-        <span class="bg-green-50 absolute lg:hidden right-0 p-4 cursor-pointer"
+        <span class="bg-green-50 absolute lg:hidden right-0 p-4 cursor-pointer z-10"
             @click="showMobileMenu = !showMobileMenu">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-10 h-10">
@@ -61,41 +61,15 @@
         <!-- Static sidebar for desktop -->
         <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
             <!-- Sidebar component, swap this element with another sidebar if you like -->
-            <div class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-black px-6 pb-4">
+            <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-black px-6 pb-4">
                 <x-sidebar />
             </div>
         </div>
 
         <div class="lg:pl-72">
 
-            <div>
-                <div>
-                    <img class="h-32 w-full object-cover object-[0_22%] lg:h-96 max-h-96"
-                        src="https://i.davidpeach.me/18/Horizon-Forbidden-West_20230815190831-scaled-1.jpg" alt="">
-                </div>
-                @if(Route::currentRouteName() === 'home')
-                <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div class="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
-                        <div class="flex">
-                            <a href="/">
-                                <img class="h-24 w-24 ring-4 ring-green-500 sm:h-32 sm:w-32"
-                                    src="https://pbs.twimg.com/profile_images/1777417342009458688/VC_Wo0S6_400x400.jpg"
-                                    alt="">
-                            </a>
-                        </div>
-                        <div
-                            class="mt-6 sm:mt-12 sm:flex sm:min-w-0 sm:flex-1 sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
-                            <div class="mt-6 min-w-0 flex-1 sm:hidden md:block">
-                                <h1 class="truncate text-2xl font-bold text-gray-900">David Peach</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-6 hidden min-w-0 flex-1 sm:block md:hidden">
-                        <h1 class="truncate text-2xl font-bold text-gray-900">David Peach</h1>
-                    </div>
-                </div>
-                @endif
-            </div>
+
+        <x-site-header />
 
             <main class="px-4 sm:px-6 lg:px-8 py-16 max-w-7xl m-auto">
                 {{ $slot }}

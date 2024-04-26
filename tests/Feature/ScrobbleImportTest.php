@@ -66,14 +66,14 @@ it('wont duplicate imported scrobbles', function () {
         ]),
     ]);
 
-    $this->artisan('app:import-scrobbles')->assertExitCode(0);
+    $this->artisan('app:import-new-scrobbles')->assertExitCode(0);
 
     expect(Artist::count())->toEqual(1);
     expect(Album::count())->toEqual(1);
     expect(Song::count())->toEqual(1);
     expect(Listen::count())->toEqual(1);
 
-    $this->artisan('app:import-scrobbles')->assertExitCode(0);
+    $this->artisan('app:import-new-scrobbles')->assertExitCode(0);
 
     expect(Artist::count())->toEqual(1);
     expect(Album::count())->toEqual(1);
@@ -116,13 +116,13 @@ it('can save imported scrobbles', function () {
         GetRecentTracks::class => MockResponse::fixture('recent'),
     ]);
 
-    $this->artisan('app:import-scrobbles')->assertExitCode(0);
+    $this->artisan('app:import-new-scrobbles')->assertExitCode(0);
 
     expect(Listen::count())->toEqual(5);
 
     assertDatabaseHas('artists', [
         'name' => 'Scars on Broadway',
-        'mbid' => '12345',
+        'mbid' => '66f0dcaa-1680-4ef3-9b63-8b2ac24d0b58',
     ]);
 
     assertDatabaseHas('albums', [
