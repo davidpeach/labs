@@ -15,8 +15,8 @@ if($exploded[0] === 'post') {
 @endphp
 <a
     href="{{ route($to ?? 'home') }}"
-    class="hover:text-indigo-600 hover:bg-gray-50 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold {{ $isCurrent ? 'bg-gray-50 text-indigo-600':'text-white'; }}">
-    <x-dynamic-component :component="'icons.' . strtolower($label)" class="mt-4" />
+    class="hover:text-black hover:bg-rose-200 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold {{ $isCurrent ? 'bg-rose-300 text-black':'text-black'; }}">
+    <x-dynamic-component :component="'icons.' . strtolower($label)" class="mt-4 bg-black" />
     {{ $label }}
 </a>
 

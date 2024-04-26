@@ -1,4 +1,4 @@
-<div class="text-white pt-6">
+<div class="text-black pt-6">
     <livewire:now-listening-to />
 </div>
 <nav class="flex flex-1 flex-col lg:pt-6">
