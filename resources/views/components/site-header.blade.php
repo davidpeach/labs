@@ -16,7 +16,9 @@
     </div>
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mx-auto max-w-7xl lg:mx-0">
-            <h2 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">Programmer and Virtual Photographer
+            <h2 class="text-4xl font-bold tracking-tight text-white sm:text-6xl"><span
+                    class="text-pink-500">Programmer</span> and <span class="text-purple-500">Virtual
+                    Photographer</span>
                 based in the U.K.</h2>
             <p class="mt-6 text-lg leading-8 text-gray-300">This website is a constant work-in-progress. I'm currently
                 migrating over from my wordpress website.</p>
