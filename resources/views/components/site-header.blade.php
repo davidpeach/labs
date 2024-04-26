@@ -1,3 +1,4 @@
+@if(Route::currentRouteName() === 'home')
 <div class="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
     <img src="https://i.davidpeach.me/18/Horizon-Forbidden-West_20230815190831-scaled-1.jpg" alt=""
         class="absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-[0_22%] opacity-20">
@@ -52,3 +53,4 @@
         </div>
     </div>
 </div>
+@endif
