@@ -51,7 +51,7 @@
                     </div>
 
                     <!-- Sidebar component, swap this element with another sidebar if you like -->
-                    <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-black px-6 pb-4">
+                    <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-rose-50 px-6 pb-4">
                         <x-sidebar />
                     </div>
                 </div>
