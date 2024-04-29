@@ -14,6 +14,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class PostResource extends Resource
 {
@@ -32,13 +33,11 @@ class PostResource extends Resource
                     Forms\Components\TextInput::make('slug')
                         ->required()
                         ->maxLength(255),
-                    Forms\Components\TextInput::make('wp_url')
-                        ->maxLength(255),
-                    Forms\Components\Select::make('category_id')
-                        ->relationship('category', 'name')
-                        ->required(),
                     Forms\Components\Select::make('kind')
-                        ->options(PostKind::class),
+                        ->options(PostKind::class)
+                        ->required(),
+                    Forms\Components\DateTimePicker::make('published_at')
+                        ->required(),
                     SpatieTagsInput::make('tags')
                         ->columnSpanFull(),
                     Forms\Components\Textarea::make('excerpt')
@@ -56,27 +55,6 @@ class PostResource extends Resource
                     SpatieMediaLibraryFileUpload::make('inline_images')
                         ->multiple()
                         ->collection('inline_images'),
-                    Forms\Components\FileUpload::make('featured_image')
-                        ->image(),
-                ])
-                ->collapsible()
-                ->collapsed(),
-            Section::make('Meta')
-                ->columns(3)
-                ->schema([
-                    Forms\Components\TextInput::make('user_id')
-                        ->required()
-                        ->numeric(),
-                    Forms\Components\TextInput::make('format')
-                        ->required()
-                        ->maxLength(255),
-                    Forms\Components\TextInput::make('status')
-                        ->required()
-                        ->maxLength(255),
-                    Forms\Components\DateTimePicker::make('published_at')
-                        ->required(),
-                    Forms\Components\TextInput::make('wp_id')
-                        ->numeric(),
                 ])
                 ->collapsible()
                 ->collapsed(),
@@ -86,6 +64,7 @@ class PostResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn (Builder $query) => $query->orderBy('published_at', 'desc'))
             ->columns([
                 // Tables\Columns\TextColumn::make('wp_id')
                 //     ->numeric()
