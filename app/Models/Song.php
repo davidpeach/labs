@@ -19,4 +19,9 @@ class Song extends Model
     {
         return $this->belongsTo(Artist::class);
     }
+
+    public function jams()
+    {
+        return $this->hasMany(Jam::class);
+    }
 }

@@ -26,6 +26,7 @@
                                 <p class="text-sm text-gray-500">Listened to <a href="#"
                                         class="font-medium text-gray-900">{{ $listen->song->title }} by {{
                                         $listen->song->artist->name }}</a></p>
+                                        <livewire:jam-it song="{{ $listen->song->id }}"/>
                             </div>
                             <div class="whitespace-nowrap text-right text-sm text-gray-500">
                                 <time></time>
