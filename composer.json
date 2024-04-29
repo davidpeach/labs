@@ -28,6 +28,8 @@
         "nunomaduro/collision": "^8.0",
         "pestphp/pest": "^2.34",
         "pestphp/pest-plugin-laravel": "^2.3",
+        "pestphp/pest-plugin-livewire": "^2.1",
+        "pestphp/pest-plugin-type-coverage": "^2.8",
         "spatie/laravel-ignition": "^2.4"
     },
     "autoload": {
