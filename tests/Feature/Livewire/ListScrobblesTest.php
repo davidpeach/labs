@@ -59,6 +59,23 @@ test('the jam it component will load when authenticated', function () {
 
     livewire(ListScrobbles::class)
         ->assertSee('Jam It!');
-    // $this->get('listens')
-    //     ->assertSeeLivewire(ListScrobbles::class);
+});
+
+test('the jam it component wont load for guests', function () {
+    $artist = Artist::create([
+        'name' => 'Test Artist',
+        'mbid' => 11,
+    ]);
+    $song = Song::create([
+        'title' => 'Test Song',
+        'artist_id' => $artist->id,
+    ]);
+    Listen::create([
+        'song_id' => $song->id,
+        'published_at' => new Carbon('25th December 2024'),
+    ]);
+
+    livewire(ListScrobbles::class)
+        ->assertDontSee('Jam It!');
+
 });
