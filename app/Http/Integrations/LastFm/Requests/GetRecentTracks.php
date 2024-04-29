@@ -14,7 +14,6 @@ class GetRecentTracks extends Request
 
     public function __construct(
         private ?int $fromTimestamp = null,
-        private ?int $toTimestamp = null,
     ) {
 
     }
@@ -37,10 +36,6 @@ class GetRecentTracks extends Request
 
         if (! is_null($this->fromTimestamp)) {
             $params['from'] = $this->fromTimestamp;
-        }
-
-        if (! is_null($this->toTimestamp)) {
-            $params['to'] = $this->toTimestamp;
         }
 
         return $params;

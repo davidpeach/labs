@@ -80,22 +80,6 @@ class Post extends Model implements HasMedia
         return $this->belongsTo(Category::class);
     }
 
-    // public function markdown(): Attribute
-    // {
-    //     return Attribute::make(
-    //         set: fn () =>
-    //     );
-    // }
-
-    public function featuredImage(): Attribute
-    {
-        $image = $this->media->firstWhere(fn (Media $item) => $item->getCustomProperty('is_featured'));
-
-        return Attribute::make(
-            get: fn () => $image?->preview_url ?? '',
-        );
-    }
-
     public function registerMediaConversions(?Media $media = null): void
     {
         $this

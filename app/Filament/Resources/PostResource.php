@@ -127,11 +127,6 @@ class PostResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make()
                     ->slideOver(),
-                Tables\Actions\Action::make('convert to photo post')
-                    ->slideOver()
-                    ->action(function (Post $record) {
-                        dd($record);
-                    }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -152,7 +147,6 @@ class PostResource extends Resource
         return [
             'index' => Pages\ListPosts::route('/'),
             'create' => Pages\CreatePost::route('/create'),
-            // 'edit' => Pages\EditPost::route('/{record}/edit'),
         ];
     }
 }

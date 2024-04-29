@@ -56,7 +56,8 @@ class ArtistResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->slideOver(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -77,7 +78,6 @@ class ArtistResource extends Resource
         return [
             'index' => Pages\ListArtists::route('/'),
             'create' => Pages\CreateArtist::route('/create'),
-            'edit' => Pages\EditArtist::route('/{record}/edit'),
         ];
     }
 }

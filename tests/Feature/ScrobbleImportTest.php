@@ -1,11 +1,13 @@
 <?php
 
 use App\ArtistCreditType;
+use App\Events\FoundNowPlaying;
 use App\Http\Integrations\LastFm\Requests\GetRecentTracks;
 use App\Models\Album;
 use App\Models\Artist;
 use App\Models\Listen;
 use App\Models\Song;
+use Illuminate\Support\Facades\Event;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 
@@ -116,7 +118,11 @@ it('can save imported scrobbles', function () {
         GetRecentTracks::class => MockResponse::fixture('recent'),
     ]);
 
+    Event::fake();
+
     $this->artisan('app:import-new-scrobbles')->assertExitCode(0);
+
+    Event::assertDispatched(FoundNowPlaying::class);
 
     expect(Listen::count())->toEqual(5);
 

@@ -3,15 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\JamResource\Pages;
-use App\Filament\Resources\JamResource\RelationManagers;
 use App\Models\Jam;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class JamResource extends Resource
 {
@@ -56,7 +53,8 @@ class JamResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->slideOver(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -77,7 +75,6 @@ class JamResource extends Resource
         return [
             'index' => Pages\ListJams::route('/'),
             'create' => Pages\CreateJam::route('/create'),
-            'edit' => Pages\EditJam::route('/{record}/edit'),
         ];
     }
 }
