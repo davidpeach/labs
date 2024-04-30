@@ -13,11 +13,14 @@ use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 use Spatie\Tags\HasTags;
 
 class Post extends Model implements HasMedia
 {
     use HasFactory;
+    use HasSlug;
     use HasTags;
     use InteractsWithMedia;
 
@@ -43,6 +46,16 @@ class Post extends Model implements HasMedia
             'kind' => PostKind::class,
             'published_at' => 'datetime',
         ];
+    }
+
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->preventOverwrite()
+            ->generateSlugsFrom(function ($model) {
+                return $model->title ?? Str::of($model->markdown)->limit(50);
+            })
+            ->saveSlugsTo('slug');
     }
 
     public static function getTagClassName(): string

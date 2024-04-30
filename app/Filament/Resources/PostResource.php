@@ -31,7 +31,6 @@ class PostResource extends Resource
                     Forms\Components\TextInput::make('title')
                         ->maxLength(255),
                     Forms\Components\TextInput::make('slug')
-                        ->required()
                         ->maxLength(255),
                     Forms\Components\Select::make('kind')
                         ->options(PostKind::class)
