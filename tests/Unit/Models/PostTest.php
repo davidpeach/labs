@@ -4,6 +4,8 @@ use App\Models\Category;
 use App\Models\Post;
 use App\PostKind;
 use Carbon\Carbon;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 test('the post permalink will be set correctly based on its post kind and slug', function ($kind, $permalinkBase) {
     config()->set('app.url', 'http://just-testing.lol');
@@ -89,4 +91,32 @@ test('media conversions', function () {
     $post->registerMediaConversions(null);
 
     expect($post->mediaConversions)->toHaveCount(1);
+});
+
+test('the post featured image can be returned', function () {
+    config()->set('media-library.disk_name', 'local');
+    Storage::fake('local');
+
+    $post = Post::create([
+        'user_id' => 1,
+        'category_id' => 1,
+        'slug' => 'my-test-post',
+        'format' => 'notneeded',
+        'status' => 'unknown',
+        'markdown' => 'this is just markdown',
+        'published_at' => new Carbon('25th December 2025'),
+    ]);
+
+    expect($post->featured)->toEqual(null);
+
+    $file = UploadedFile::fake()->image('some-file.jpg');
+
+    $post = $post->fresh();
+
+    $post->addMedia($file)
+        ->toMediaCollection('inline_images');
+
+    $featured = $post->getMedia('inline_images')->first();
+
+    expect($post->featured)->toEqual($featured->getUrl('preview'));
 });

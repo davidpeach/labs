@@ -52,7 +52,7 @@ test('an artist can have songs', function () {
     expect($artist->songs->count())->toEqual(2);
 });
 
-test('something', function () {
+test('the artist avatar can be returned', function () {
     config()->set('media-library.disk_name', 'local');
     Storage::fake('local');
 
