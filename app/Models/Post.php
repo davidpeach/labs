@@ -66,6 +66,21 @@ class Post extends Model implements HasMedia
         );
     }
 
+    public function featured(): Attribute
+    {
+        $firstImage = $this->getMedia()->first();
+
+        if (is_null($firstImage)) {
+            $url = null;
+        } else {
+            $url = $firstImage->getUrl('preview');
+        }
+
+        return Attribute::make(
+            get: fn () => $url,
+        );
+    }
+
     protected static function booted(): void
     {
         static::saving(function (Post $post) {

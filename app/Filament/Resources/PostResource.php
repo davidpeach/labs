@@ -66,28 +66,11 @@ class PostResource extends Resource
         return $table
             ->modifyQueryUsing(fn (Builder $query) => $query->orderBy('published_at', 'desc'))
             ->columns([
-                // Tables\Columns\TextColumn::make('wp_id')
-                //     ->numeric()
-                //     ->sortable(),
-                Tables\Columns\TextColumn::make('category.name')
-                    ->numeric()
-                    ->sortable(),
-                // Tables\Columns\TextColumn::make('user_id')
-                //     ->numeric()
-                //     ->sortable(),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('kind')
                     ->searchable(),
-                // Tables\Columns\TextColumn::make('slug')
-                //     ->searchable(),
-                // Tables\Columns\TextColumn::make('wp_url')
-                //     ->searchable(),
-                // Tables\Columns\ImageColumn::make('featured_image'),
-                // Tables\Columns\TextColumn::make('format')
-                //     ->searchable(),
-                // Tables\Columns\TextColumn::make('status')
-                //     ->searchable(),
+                Tables\Columns\ImageColumn::make('featured'),
                 Tables\Columns\TextColumn::make('published_at')
                     ->dateTime()
                     ->sortable(),
