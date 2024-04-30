@@ -68,7 +68,7 @@ class Post extends Model implements HasMedia
 
     public function featured(): Attribute
     {
-        $firstImage = $this->getMedia()->first();
+        $firstImage = $this->getMedia('inline_images')->first();
 
         if (is_null($firstImage)) {
             $url = null;
