@@ -102,6 +102,7 @@ class PostResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('category')->relationship('category', 'name'),
+                SelectFilter::make('kind')->options(PostKind::class),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
