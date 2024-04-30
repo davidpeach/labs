@@ -1,4 +1,3 @@
-                <!-- Current: "bg-gray-50 text-indigo-600", Default: "text-gray-700 hover:text-indigo-600 hover:bg-gray-50" -->
 @php
 $isCurrent = false;
 
@@ -6,17 +5,20 @@ $current = Route::currentRouteName();
 $exploded = explode('.', $current);
 
 if($exploded[0] === 'post') {
-    $exploded = explode('/', Request::path());
-    $isCurrent = str_starts_with($exploded[0], $route);
+$exploded = explode('/', Request::path());
+$isCurrent = str_starts_with($exploded[0], $route);
 } else {
-    $isCurrent = ($exploded[0] === $route);
+$isCurrent = ($exploded[0] === $route);
 }
 
 @endphp
-<a
-    href="{{ route($to ?? 'home') }}"
-    class="hover:text-black hover:bg-rose-200 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold {{ $isCurrent ? 'bg-rose-300 text-black':'text-black'; }}">
-    <x-dynamic-component :component="'icons.' . strtolower($label)" class="mt-4 bg-black" />
+@if($mode === 'wide')
+<a href="{{ route($to ?? 'home') }}"
+    class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 {{ $isCurrent ? 'border-indigo-500 text-gray-900':'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'; }}">
     {{ $label }}
 </a>
-
+@elseif($mode === 'mobile')
+<a href="{{ route($to ?? 'home') }}"
+    class="block border-l-4 py-2 pl-3 pr-4 text-base font-medium {{ $isCurrent ? 'bg-indigo-50 border-indigo-500 text-indigo-700': 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800' }}">{{
+    $label }}</a>
+@endif

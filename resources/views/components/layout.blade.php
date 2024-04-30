@@ -10,67 +10,18 @@
     @livewireScripts()
 </head>
 
-<body class="">
+<body>
 
-    <div x-data="{showMobileMenu: false}">
-
-        <span class="bg-green-50 absolute lg:hidden right-0 p-4 cursor-pointer z-10"
-            @click="showMobileMenu = !showMobileMenu">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="w-10 h-10">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-
-        </span>
-
-        <div x-cloak :class="
-                showMobileMenu ?
-                'relative z-50 lg:hidden transition-opacity ease-linear duration-300 opacity-100':
-                'relative z-50 lg:hidden transition-opacity ease-linear duration-300 opacity-0'
-                " role="dialog" aria-modal="true">
-
-            <div x-show="showMobileMenu" class="fixed inset-0 bg-gray-900/80"></div>
-
-            <div :class="
-                    showMobileMenu ?
-                    'fixed inset-0 flex transition ease-in-out duration-300 transform translate-x-0':
-                    'fixed inset-0 flex transition ease-in-out duration-300 transform -translate-x-full'
-                    ">
-                <div :class="
-                        showMobileMenu ?
-                        'relative mr-16 flex w-full max-w-xs flex-1 ease-in-out duration-300 opacity-100':
-                        'relative mr-16 flex w-full max-w-xs flex-1 ease-in-out duration-300 opacity-0'
-                        ">
-                    <div class="absolute left-full top-0 flex w-16 justify-center pt-5">
-                        <button type="button" class="-m-2.5 p-2.5" @click="showMobileMenu = false">
-                            <span class="sr-only">Close sidebar</span>
-                            <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-                    </div>
-
-                    <!-- Sidebar component, swap this element with another sidebar if you like -->
-                    <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-rose-50 px-6 pb-4">
-                        <x-sidebar />
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Static sidebar for desktop -->
-        <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
-            <!-- Sidebar component, swap this element with another sidebar if you like -->
-            <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-rose-50 px-6 pb-4">
-                <x-sidebar />
-            </div>
-        </div>
-
-        <div class="lg:pl-72">
+    <div>
 
 
-        <x-site-header />
+
+
+        <div>
+
+            <x-site-nav-bar />
+
+            <x-site-header />
 
             <main class="px-4 sm:px-6 lg:px-8 py-16 max-w-7xl m-auto">
                 {{ $slot }}

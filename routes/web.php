@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+Route::get('now', function () {
+    return view('now');
+})->name('now');
+
 Route::get('scrobble-count', function () {
     return Listen::count();
 });
