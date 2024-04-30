@@ -36,6 +36,7 @@ class PostResource extends Resource
                         ->options(PostKind::class)
                         ->required(),
                     Forms\Components\DateTimePicker::make('published_at')
+                        ->default(now())
                         ->required(),
                     SpatieTagsInput::make('tags')
                         ->columnSpanFull(),
