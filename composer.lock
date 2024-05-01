@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "156ea35ef4e4bb976fd38c69d5bb1bce",
+    "content-hash": "9682d35aa6a7737d19858fe757428aa7",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -715,6 +715,49 @@
                 }
             ],
             "time": "2024-01-21T14:53:34+00:00"
+        },
+        {
+            "name": "davidpeach/activitypub-for-laravel",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "/var/www/ap",
+                "reference": "e75fbd103a060d44824122a2a8a77c222cc76efd"
+            },
+            "require": {
+                "laravel/framework": "^11.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "DavidPeach\\ActivityPubForLaravel\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "DavidPeach\\ActivityPubForLaravel\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A package to enable Activitypub in Laravel",
+            "keywords": [
+                "activitypub",
+                "laravel"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": false
+            }
         },
         {
             "name": "dflydev/dot-access-data",
@@ -13511,7 +13554,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {
         "laravel/reverb": 10
     },
