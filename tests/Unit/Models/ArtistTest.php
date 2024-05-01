@@ -7,10 +7,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
 test('media conversions', function () {
-    $artist = Artist::create([
-        'name' => 'Test Artist',
-        'mbid' => '111',
-    ]);
+    $artist = Artist::factory()->create();
 
     expect($artist->mediaConversions)->toHaveCount(0);
 
@@ -20,10 +17,7 @@ test('media conversions', function () {
 });
 
 test('media collections', function () {
-    $artist = Artist::create([
-        'name' => 'Test Artist',
-        'mbid' => '111',
-    ]);
+    $artist = Artist::factory()->create();
 
     expect($artist->mediaCollections)->toHaveCount(0);
 
@@ -33,19 +27,9 @@ test('media collections', function () {
 });
 
 test('an artist can have songs', function () {
-    // TODO next
-    $artist = Artist::create([
-        'name' => 'Test Artist',
-        'mbid' => '111',
-    ]);
-    $songOne = Song::create([
-        'title' => 'The Song',
-        'artist_id' => $artist->id,
-    ]);
-    $songTwo = Song::create([
-        'title' => 'The Song',
-        'artist_id' => $artist->id,
-    ]);
+    $songOne = Song::factory()->create();
+    $songTwo = Song::factory()->create();
+    $artist = Artist::factory()->create();
     $artist->songs()->attach($songOne->id, ['credit_type' => ArtistCreditType::PERFORMER]);
     $artist->songs()->attach($songTwo->id, ['credit_type' => ArtistCreditType::PERFORMER]);
 
@@ -56,10 +40,7 @@ test('the artist avatar can be returned', function () {
     config()->set('media-library.disk_name', 'local');
     Storage::fake('local');
 
-    $artist = Artist::create([
-        'name' => 'Test Artist',
-        'mbid' => '111',
-    ]);
+    $artist = Artist::factory()->create();
 
     $file = UploadedFile::fake()->image('some-file.jpg');
 

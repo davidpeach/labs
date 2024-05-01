@@ -16,6 +16,13 @@ class Jam extends Model
         'markdown',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'published_at' => 'datetime',
+        ];
+    }
+
     public function song(): BelongsTo
     {
         return $this->belongsTo(Song::class);

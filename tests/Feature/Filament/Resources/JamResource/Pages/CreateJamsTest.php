@@ -2,7 +2,6 @@
 
 use App\Filament\Resources\JamResource;
 use App\Filament\Resources\JamResource\Pages\CreateJam;
-use App\Models\Artist;
 use App\Models\Song;
 use App\Models\User;
 use Carbon\Carbon;
@@ -16,14 +15,8 @@ it('can render the jam create admin page', function () {
 });
 
 it('can successfully fill out the create jam form', function () {
-    $artist = Artist::create([
-        'name' => 'Test Artist',
-        'mbid' => 11,
-    ]);
-    $song = Song::create([
-        'title' => 'Test Song',
-        'artist_id' => $artist->id,
-    ]);
+    $song = Song::factory()->create();
+
     Livewire::test(CreateJam::class)
         ->fillForm([
             'song_id' => $song->id,

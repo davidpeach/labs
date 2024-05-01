@@ -7,47 +7,28 @@ use App\PostKind;
 use Carbon\Carbon;
 
 test('the notes index page will show the notes', function () {
-    Post::create([
-        'user_id' => 1,
-        'category_id' => 1,
-        'title' => '',
-        'slug' => 'my-test-post',
-        'format' => 'notneeded',
-        'status' => 'unknown',
-        'markdown' => 'this is just markdown first',
-        'published_at' => new Carbon('25th December 2025'),
+    $postA = Post::factory()->create([
         'kind' => PostKind::NOTE,
+        'published_at' => new Carbon('1st January 2024'),
     ]);
 
-    Post::create([
-        'user_id' => 1,
-        'category_id' => 1,
-        'title' => '',
-        'slug' => 'my-test-post-2',
-        'format' => 'notneeded',
-        'status' => 'unknown',
-        'markdown' => 'this is just markdown again',
-        'published_at' => new Carbon('25th December 2025'),
+    $postB = Post::factory()->create([
         'kind' => PostKind::NOTE,
+        'published_at' => new Carbon('10th January 2024'),
     ]);
 
-    Post::create([
-        'user_id' => 1,
-        'category_id' => 1,
-        'title' => '',
-        'slug' => 'my-test-note',
-        'format' => 'notneeded',
-        'status' => 'unknown',
-        'markdown' => 'this is just an article',
-        'published_at' => new Carbon('25th December 2025'),
+    $postC = Post::factory()->create([
         'kind' => PostKind::ARTICLE,
+        'published_at' => new Carbon('20th January 2024'),
     ]);
 
     $this->get(PostKind::NOTE->getSlugPart())
         ->assertOk()
         ->assertViewHas('posts')
-        ->assertSee('this is just markdown first', false)
-        ->assertSee('this is just markdown again', false)
-        ->assertDontSee('this is just an article');
+        ->assertSeeInOrder([
+            $postB->title,
+            $postA->title,
+        ])
+        ->assertDontSee($postC->title);
 
 });

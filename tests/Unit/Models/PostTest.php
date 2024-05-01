@@ -76,15 +76,7 @@ test('a post can belong to a category', function () {
 });
 
 test('media conversions', function () {
-    $post = Post::create([
-        'user_id' => 1,
-        'category_id' => 1,
-        'slug' => 'my-test-post',
-        'format' => 'notneeded',
-        'status' => 'unknown',
-        'markdown' => 'this is just markdown',
-        'published_at' => new Carbon('25th December 2025'),
-    ]);
+    $post = Post::factory()->create();
 
     expect($post->mediaConversions)->toHaveCount(0);
 
@@ -97,15 +89,7 @@ test('the post featured image can be returned', function () {
     config()->set('media-library.disk_name', 'local');
     Storage::fake('local');
 
-    $post = Post::create([
-        'user_id' => 1,
-        'category_id' => 1,
-        'slug' => 'my-test-post',
-        'format' => 'notneeded',
-        'status' => 'unknown',
-        'markdown' => 'this is just markdown',
-        'published_at' => new Carbon('25th December 2025'),
-    ]);
+    $post = Post::factory()->create();
 
     expect($post->featured)->toEqual(null);
 

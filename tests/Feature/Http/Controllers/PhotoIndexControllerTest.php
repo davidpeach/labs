@@ -7,61 +7,33 @@ use App\PostKind;
 use Carbon\Carbon;
 
 test('photo posts can be viewed on the photos index page', function () {
-    Post::create([
-        'user_id' => 1,
-        'category_id' => 1,
-        'title' => 'My Photo Post 1',
-        'slug' => 'my-test-post',
-        'format' => 'notneeded',
-        'status' => 'unknown',
-        'markdown' => 'this is just markdown first',
-        'published_at' => new Carbon('25th December 2025'),
+    $postA = Post::factory()->create([
         'kind' => PostKind::PHOTO,
+        'published_at' => new Carbon('1st January 2024'),
     ]);
 
-    Post::create([
-        'user_id' => 1,
-        'category_id' => 1,
-        'title' => 'My Photo Post 2',
-        'slug' => 'my-test-post-2',
-        'format' => 'notneeded',
-        'status' => 'unknown',
-        'markdown' => 'this is just markdown again',
-        'published_at' => new Carbon('25th December 2025'),
+    $postB = Post::factory()->create([
         'kind' => PostKind::PHOTO,
+        'published_at' => new Carbon('10th January 2024'),
     ]);
 
-    Post::create([
-        'user_id' => 1,
-        'category_id' => 1,
-        'title' => 'A note post',
-        'slug' => 'my-test-note',
-        'format' => 'notneeded',
-        'status' => 'unknown',
-        'markdown' => 'this is just a note',
-        'published_at' => new Carbon('25th December 2025'),
-        'kind' => PostKind::NOTE,
+    $postC = Post::factory()->create([
+        'kind' => PostKind::ARTICLE,
+        'published_at' => new Carbon('20th January 2024'),
     ]);
 
     $this->get(PostKind::PHOTO->getSlugPart())
         ->assertOk()
         ->assertViewHas('posts')
-        ->assertSee('My Photo Post 1', false)
-        ->assertSee('My Photo Post 2', false)
-        ->assertDontSee('A note post');
-
+        ->assertSeeInOrder([
+            $postB->title,
+            $postA->title,
+        ])
+        ->assertDontSee($postC->title);
 });
 
 test('accessing a single post with the wrong url base will result in 404', function () {
-    $post = Post::create([
-        'user_id' => 1,
-        'category_id' => 1,
-        'title' => 'My Test Post',
-        'slug' => 'my-test-post',
-        'format' => 'notneeded',
-        'status' => 'unknown',
-        'markdown' => 'this is just markdown',
-        'published_at' => new Carbon('25th December 2025'),
+    $post = Post::factory()->create([
         'kind' => PostKind::ARTICLE,
     ]);
 

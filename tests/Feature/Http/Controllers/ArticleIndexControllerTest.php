@@ -7,39 +7,16 @@ use App\PostKind;
 use Carbon\Carbon;
 
 test('the articles index page will show the articles', function () {
-    Post::create([
-        'user_id' => 1,
-        'category_id' => 1,
-        'title' => 'First article post',
-        'slug' => 'my-test-post',
-        'format' => 'notneeded',
-        'status' => 'unknown',
-        'markdown' => 'this is just markdown first',
-        'published_at' => new Carbon('25th December 2025'),
+    $postA = Post::factory()->create([
+        'published_at' => new Carbon('10th January 2024'),
         'kind' => PostKind::ARTICLE,
     ]);
-
-    Post::create([
-        'user_id' => 1,
-        'category_id' => 1,
-        'title' => 'Second article post',
-        'slug' => 'my-test-post-2',
-        'format' => 'notneeded',
-        'status' => 'unknown',
-        'markdown' => 'this is just markdown again',
-        'published_at' => new Carbon('26th December 2025'),
+    $postB = Post::factory()->create([
+        'published_at' => new Carbon('1st January 2024'),
         'kind' => PostKind::ARTICLE,
     ]);
-
-    Post::create([
-        'user_id' => 1,
-        'category_id' => 1,
-        'title' => '',
-        'slug' => 'my-test-note',
-        'format' => 'notneeded',
-        'status' => 'unknown',
-        'markdown' => 'this is just a note',
-        'published_at' => new Carbon('25th December 2025'),
+    $postC = Post::factory()->create([
+        'published_at' => new Carbon('10th January 2024'),
         'kind' => PostKind::NOTE,
     ]);
 
@@ -47,9 +24,8 @@ test('the articles index page will show the articles', function () {
         ->assertOk()
         ->assertViewHas('posts')
         ->assertSeeInOrder([
-            'Second article post',
-            'First article post',
+            $postA->title,
+            $postB->title,
         ])
-        ->assertDontSee('this is just a note');
-
+        ->assertDontSee($postC->title);
 });
