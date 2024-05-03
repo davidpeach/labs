@@ -27,4 +27,13 @@ enum PostKind: int implements HasLabel
             self::PHOTO => 'Photo',
         };
     }
+
+    public function getViewName(): ?string
+    {
+        return match ($this) {
+            self::NOTE => 'note',
+            self::ARTICLE => 'article',
+            self::PHOTO => 'photo',
+        };
+    }
 }
