@@ -27,7 +27,7 @@
                                         class="font-medium text-gray-900">{{ $listen->song->title }} by {{
                                         $listen->song->artist->name }}</a></p>
                                         @auth
-                                        <livewire:jam-it song="{{ $listen->song->id }}"/>
+                                        <livewire:jam-it wire:key="jam-it-{{ $listen->id }}" song="{{ $listen->song->id }}"/>
                                         @endauth
                             </div>
                             <div class="whitespace-nowrap text-right text-sm text-gray-500">
