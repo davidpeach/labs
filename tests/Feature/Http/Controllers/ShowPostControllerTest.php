@@ -16,11 +16,11 @@ test('a single post page will display the correct post content', function () {
 
 });
 
-test('accessing a single post with the wrong url base will result in 404', function () {
+test('accessing a single post with the wrong url base will result in 301 redirect to correct post', function () {
     $post = Post::factory()->create([
         'kind' => PostKind::ARTICLE,
     ]);
 
     $this->get(str_replace('articles', 'notes', $post->permalink))
-        ->assertNotFound();
+        ->assertRedirect($post->permalink);
 });

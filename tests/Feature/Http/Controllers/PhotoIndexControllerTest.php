@@ -31,12 +31,3 @@ test('photo posts can be viewed on the photos index page', function () {
         ])
         ->assertDontSee($postC->title);
 });
-
-test('accessing a single post with the wrong url base will result in 404', function () {
-    $post = Post::factory()->create([
-        'kind' => PostKind::ARTICLE,
-    ]);
-
-    $this->get(str_replace('articles', 'notes', $post->permalink))
-        ->assertNotFound();
-});
