@@ -1,6 +1,8 @@
 <x-layout>
 <div class="h-entry mx-auto prose lg:prose-xl prose-stone max-w-7xl">
+@if($post->title)
 <x-page-title :title="$post->title" />
+@endif
 <div class="e-content">
 <time class="dt-published">{{ $post->published_at->format('jS F Y') }}</time>
 {!! $post->content !!}
