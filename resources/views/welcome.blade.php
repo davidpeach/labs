@@ -34,19 +34,20 @@
         </x-paragraph>
 
         <h2>Latest Photos</h2>
-        <section class="grid md:grid-cols-3 gap-2 border-b-4 border-b-black border-dashed">
+        <section class="grid md:grid-cols-3 gap-2 py-32">
             @php
             $photos = App\Models\Post::where('kind', App\PostKind::PHOTO)->latest()->limit(3)->get();
             @endphp
-            @foreach($photos as $photo)
-            <article class="">
-                <x-excerpt-image :post="$photo" :size="'square'" />
-                <h3 class="text-3xl">{{ $photo->title }}</h3>
-            </article>
+            @foreach($photos as $post)
+            @php
+            $componentName = 'post-kinds.' . $post->kind->getViewName() . '-excerpt';
+            @endphp
+            <x-dynamic-component :component="$componentName" :post="$post" />
+
             @endforeach
         </section>
         <h2>Latest Articles</h2>
-        <section class="grid grid-cols-3 gap-2 border-b-4 border-b-black border-dashed prose">
+        <section class="grid grid-cols-3 gap-2 py-32">
             @php
             $photos = App\Models\Post::where('kind', App\PostKind::ARTICLE)->latest()->limit(3)->get();
             @endphp
@@ -57,7 +58,7 @@
             @endforeach
         </section>
         <h2>Latest Notes</h2>
-        <section class="prose">
+        <section class="py-32">
             @php
             $photos = App\Models\Post::where('kind', App\PostKind::NOTE)->latest()->limit(3)->get();
             @endphp

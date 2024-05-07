@@ -1,5 +1,5 @@
 <x-layout>
-<div class="mx-auto max-w-7xl prose lg:prose-2xl">
+<div class="mx-auto max-w-7xl">
 <x-page-title title="Posts" />
 @foreach($posts as $post)
 @php
