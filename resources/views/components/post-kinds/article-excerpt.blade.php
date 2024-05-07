@@ -1,4 +1,4 @@
-<article class="@container border-solid border-b-2 border-b-gray-400 pb-4 pt-4">
+<article class="@container border-solid border-b-2 border-b-gray-400 py-16">
     <h2 class="text-2xl @md:text-3xl @lg:text-4xl @xl:text-5xl mb-4"><a href="{{ $post->permalink }}">{{ $post->title }}</a></h2>
     @if ($post->excerpt)
         <x-paragraph>{{ $post->excerpt }}</x-paragraph>
