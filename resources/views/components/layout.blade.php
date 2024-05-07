@@ -23,7 +23,7 @@
 
             <x-site-header />
 
-            <main class="px-4 sm:px-6 lg:px-8 py-16 max-w-7xl m-auto">
+            <main class="px-4 sm:px-6 lg:px-8 py-16  max-w-wider m-auto">
                 {{ $slot }}
             </main>
             <footer class="bg-white" aria-labelledby="footer-heading">
