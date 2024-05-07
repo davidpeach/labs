@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="@container mx-auto max-w-wide px-6 lg:px-8">
+    <div class="@container mx-auto max-w-wide">
         <x-paragraph>
             Welcome to my homepage.
         </x-paragraph>

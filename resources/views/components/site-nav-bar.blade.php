@@ -6,14 +6,14 @@
 -->
 <div>
 
-    <nav x-data="{ open: false }" class="bg-white shadow">
-        <div class="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
+    <nav x-data="{ open: false }" class="bg-white shadow border-b-8 border-indigo-500">
+        <div class="mx-auto max-w-wide lg:px-8">
             <div class="flex h-16 justify-between">
                 <div class="flex px-2 lg:px-0">
                     <div class="flex flex-shrink-0 items-center">
                         <!-- image was here -->
                     </div>
-                    <div class="hidden lg:ml-6 lg:flex lg:space-x-8">
+                    <div class="hidden lg:flex">
                         <x-partials.nav-item label="Home" route="home" to="home" mode="wide" />
                         <x-partials.nav-item label="Now" route="now" to="now" mode="wide" />
                         <x-partials.nav-item label="Notes" route="note" to="note.index" mode="wide" />
