@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Str;
+use Spatie\Image\Enums\CropPosition;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -112,7 +113,10 @@ class Post extends Model implements HasMedia
     {
         $this
             ->addMediaConversion('preview')
-            ->fit(Fit::Contain, 300, 300)
-            ->nonQueued();
+            ->fit(Fit::Contain, 300, 300);
+
+        $this
+            ->addMediaConversion('square')
+            ->crop(900, 900, CropPosition::Center);
     }
 }

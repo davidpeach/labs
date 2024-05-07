@@ -82,7 +82,7 @@ test('media conversions', function () {
 
     $post->registerMediaConversions(null);
 
-    expect($post->mediaConversions)->toHaveCount(1);
+    expect($post->mediaConversions)->toHaveCount(2);
 });
 
 test('the post featured image can be returned', function () {
