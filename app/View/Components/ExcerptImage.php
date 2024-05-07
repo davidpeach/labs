@@ -14,6 +14,7 @@ class ExcerptImage extends Component
      */
     public function __construct(
         public Post $post,
+        public string $size = '',
     ) {
         //
     }

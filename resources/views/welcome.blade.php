@@ -30,7 +30,7 @@
             @foreach($photos as $photo)
             <article class="">
                 <h3>{{ $photo->title }}</h3>
-                <x-excerpt-image :post="$photo" />
+                <x-excerpt-image :post="$photo" :size="'square'" />
             </article>
             @endforeach
         </section>
