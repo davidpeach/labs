@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="mx-auto max-w-wide px-6 lg:px-8">
+    <div class="@container mx-auto max-w-wide px-6 lg:px-8">
         <x-paragraph>
             Welcome to my homepage.
         </x-paragraph>
@@ -51,10 +51,12 @@
             @php
             $photos = App\Models\Post::where('kind', App\PostKind::ARTICLE)->latest()->limit(3)->get();
             @endphp
-            @foreach($photos as $photo)
-            <article>
-                <x-post-excerpt :post="$photo" />
-            </article>
+            @foreach($photos as $post)
+            @php
+            $componentName = 'post-kinds.' . $post->kind->getViewName() . '-excerpt';
+            @endphp
+            <x-dynamic-component :component="$componentName" :post="$post" />
+
             @endforeach
         </section>
         <h2>Latest Notes</h2>
@@ -62,10 +64,12 @@
             @php
             $photos = App\Models\Post::where('kind', App\PostKind::NOTE)->latest()->limit(3)->get();
             @endphp
-            @foreach($photos as $photo)
-            <article class="">
-                <x-post-excerpt :post="$photo" />
-            </article>
+            @foreach($photos as $post)
+            @php
+            $componentName = 'post-kinds.' . $post->kind->getViewName() . '-excerpt';
+            @endphp
+            <x-dynamic-component :component="$componentName" :post="$post" />
+
             @endforeach
         </section>
     </div>
