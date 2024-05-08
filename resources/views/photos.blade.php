@@ -1,5 +1,5 @@
 <x-layout>
-<div class="@container mx-auto max-w-7xl">
+<div class="@container">
 <x-page-title title="Posts" />
 <div class="grid gap-4 @2xl:grid-cols-2 @5xl:grid-cols-3">
 @foreach($posts as $post)

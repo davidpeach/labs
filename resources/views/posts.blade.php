@@ -1,5 +1,5 @@
 <x-layout>
-<div class="mx-auto max-w-7xl">
+<div class="mx-auto">
 <x-page-title title="Posts" />
 @foreach($posts as $post)
 @php
