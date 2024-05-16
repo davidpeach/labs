@@ -1,34 +1,30 @@
 <x-layout>
-<div class="@container h-entry mx-automax-w-7xl">
-@if($post->title)
-<x-bold-titled-wrapper titletag='h1'>
-    <x-slot:title class="text-green-600">
-        {{ $post->title }}
-    </x-slot>
-    <x-slot:contents class="lg:bg-green-600 text-white">
-        @if ($post->excerpt)
+    <div class="@container h-entry mx-automax-w-7xl">
+        @if($post->title)
+        <h1 class='max-w-wide m-auto text-4xl md:text-4xl lg:text-7xl 2xl:text-[8rem]
+            font-bold bottom-full leading-[2rem] lg:leading-[5rem] 2xl:leading-[8rem]
+            uppercase text-green-600'>{{ $post->title }}</h1>
+        @if($post->excerpt)
         {{ $post->excerpt }}
         @endif
+        <span class="dt-published text-2xl xl:text-3xl">Published on <time>{{
+                $post->published_at->format('jS F Y') }}</time></span>
+        @endif
+        <p class="sr-only">Written by <span class="p-author h-card">David Peach</span></p>
+        <x-content>
+            {!! $post->content !!}
+        </x-content>
+
+        @php
+        $images = $post->getMedia('inline_images')
+        @endphp
+        @unless($images->isEmpty())
+
+        @foreach($images as $image)
+        <img src="{{ $image->getFullUrl() }}" />
+        @endforeach
+
+        @endunless
         <x-tag-list :tags="$post->tags" />
-    </x-slot>
-</x-bold-titled-wrapper>
-@endif
-<p class="sr-only">Written by <span class="p-author h-card">David Peach</span></p>
-<time class="dt-published">{{ $post->published_at->format('jS F Y') }}</time>
-<x-content>
-{!! $post->content !!}
-</x-content>
-
-@php
-$images = $post->getMedia('inline_images')
-@endphp
-@unless($images->isEmpty())
-
-@foreach($images as $image)
-    <img src="{{ $image->getFullUrl() }}" />
-@endforeach
-
-@endunless
-<x-tag-list :tags="$post->tags" />
-</div>
+    </div>
 </x-layout>
