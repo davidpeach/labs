@@ -5,7 +5,7 @@
     <x-slot:title class="text-green-600">
         {{ $post->title }}
     </x-slot>
-    <x-slot:contents class="lg:bg-green-600 text-white lg:my-16">
+    <x-slot:contents class="lg:bg-green-600 text-white">
         @if ($post->excerpt)
         {{ $post->excerpt }}
         @endif
