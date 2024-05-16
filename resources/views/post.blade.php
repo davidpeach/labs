@@ -7,8 +7,8 @@
         @if($post->excerpt)
         {{ $post->excerpt }}
         @endif
-        <span class="dt-published text-2xl xl:text-3xl">Published on <time>{{
-                $post->published_at->format('jS F Y') }}</time></span>
+        <p class="dt-published text-2xl xl:text-3xl">Published on <time>{{
+                $post->published_at->format('jS F Y') }}</time></p>
         @endif
         <p class="sr-only">Written by <span class="p-author h-card">David Peach</span></p>
         <x-content>
