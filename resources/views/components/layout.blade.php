@@ -19,7 +19,9 @@
 
             <main class="px-4 sm:px-6 lg:px-8 py-16  max-w-wide m-auto">
                 {{ $slot }}
+
             </main>
+            <x-tag-cloud />
             <x-site-footer />
         </div>
     </div>

@@ -1,6 +1,9 @@
-<section class="bg-sky-200 relative my-40">
-    <div class="max-w-wide m-auto px-6 lg:px-8 py-16">
-        <p class="text-2xl md:text-4xl lg:text-7xl 2xl:text-[8rem] font-bold text-sky-200 absolute bottom-full leading-[2rem] lg:leading-[3.3rem] 2xl:leading-[5.5rem] uppercase">Website Tags</p>
+<div class="my-16 lg:my-32">
+<x-bold-titled-wrapper titletag="'p'">
+    <x-slot:title class="text-sky-200">
+        tags
+    </x-slot>
+    <x-slot:contents class="bg-sky-200">
         <ul class="leading-10 text-sm lg:text-xl uppercase tracking-wide">
             @foreach($tags as $tag)
             <li class="inline-block my-2 lg:my-2 lg:mx-1">
@@ -8,5 +11,6 @@
             </li>
             @endforeach
         </ul>
-    </div>
-</section>
+    </x-slot>
+</x-bold-titled-wrapper>
+</div>
