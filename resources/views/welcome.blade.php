@@ -96,18 +96,5 @@
             </x-slot>
         </x-bold-titled-wrapper>
         </div>
-        <h2>Latest Notes</h2>
-        <section class="py-32">
-            @php
-            $photos = App\Models\Post::where('kind', App\PostKind::NOTE)->latest()->limit(3)->get();
-            @endphp
-            @foreach($photos as $post)
-            @php
-            $componentName = 'post-kinds.' . $post->kind->getViewName() . '-excerpt';
-            @endphp
-            <x-dynamic-component :component="$componentName" :post="$post" />
-
-            @endforeach
-        </section>
     </div>
 </x-layout>
