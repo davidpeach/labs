@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="@container mx-auto max-w-wide">
+    <div class="@container">
         <x-paragraph>
             Welcome to my homepage.
         </x-paragraph>
@@ -9,7 +9,7 @@
             ramblings and chunterings. But there is a good portion of it I am proud of.
         </x-paragraph>
 
-        <figure>
+        <figure class="max-w-wide m-auto px-4 lg:px-8">
             <img src=" https://i.davidpeach.me/725/ArQYqZSCAAIyJEe.jpg" title="My website, circa 2012"
                 class="border-8 border-purple-300" />
             <figcaption>My website, circa 2012</figcaption>
@@ -33,10 +33,15 @@
             On this site you'll find a range of topics I've posted about through the years.
         </x-paragraph>
 
-        <h2>Latest Photos</h2>
-        <section class="grid md:grid-cols-3 gap-2 py-32">
+        <div class="my-16 lg:my-32">
+        <x-bold-titled-wrapper titletag="'p'">
+            <x-slot:title class="text-green-200">
+                latest photos
+            </x-slot>
+            <x-slot:contents class="bg-green-200 ">
+            <section class="grid md:grid-cols-3 gap-2 py-32">
             @php
-            $photos = App\Models\Post::where('kind', App\PostKind::PHOTO)->latest()->limit(3)->get();
+            $photos = App\Models\Post::where('kind', App\PostKind::PHOTO)->latest()->limit(6)->get();
             @endphp
             @foreach($photos as $post)
             @php
@@ -45,20 +50,52 @@
             <x-dynamic-component :component="$componentName" :post="$post" />
 
             @endforeach
-        </section>
-        <h2>Latest Articles</h2>
-        <section class="grid grid-cols-3 gap-2 py-32">
-            @php
-            $photos = App\Models\Post::where('kind', App\PostKind::ARTICLE)->latest()->limit(3)->get();
-            @endphp
-            @foreach($photos as $post)
-            @php
-            $componentName = 'post-kinds.' . $post->kind->getViewName() . '-excerpt';
-            @endphp
-            <x-dynamic-component :component="$componentName" :post="$post" />
+            </section>
+            </x-slot>
+        </x-bold-titled-wrapper>
+        </div>
 
-            @endforeach
-        </section>
+        <div class="my-16 lg:my-32">
+        <x-bold-titled-wrapper titletag="'p'">
+            <x-slot:title class="text-amber-200">
+                latest articles
+            </x-slot>
+            <x-slot:contents class="bg-amber-200">
+                <section class="grid grid-cols-3 gap-2 py-32 lg:gap-8">
+                    @php
+                    $articles = App\Models\Post::where('kind', App\PostKind::ARTICLE)->latest()->limit(3)->get();
+                    @endphp
+                    @foreach($articles as $post)
+                    @php
+                    $componentName = 'post-kinds.' . $post->kind->getViewName() . '-excerpt';
+                    @endphp
+                    <x-dynamic-component :component="$componentName" :post="$post" />
+
+                    @endforeach
+                </section>
+            </x-slot>
+        </x-bold-titled-wrapper>
+        </div>
+
+        <div class="my-16 lg:my-32">
+        <x-bold-titled-wrapper titletag="'p'">
+            <x-slot:title class="text-rose-300">
+                latest notes
+            </x-slot>
+            <x-slot:contents class="bg-rose-300">
+                @php
+                $photos = App\Models\Post::where('kind', App\PostKind::NOTE)->latest()->limit(3)->get();
+                @endphp
+                @foreach($photos as $post)
+                @php
+                $componentName = 'post-kinds.' . $post->kind->getViewName() . '-excerpt';
+                @endphp
+                <x-dynamic-component :component="$componentName" :post="$post" />
+
+                @endforeach
+            </x-slot>
+        </x-bold-titled-wrapper>
+        </div>
         <h2>Latest Notes</h2>
         <section class="py-32">
             @php
