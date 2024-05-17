@@ -39,7 +39,7 @@
                 latest photos
             </x-slot>
             <x-slot:contents class="bg-green-200 ">
-            <section class="grid md:grid-cols-3 gap-2 py-32">
+            <section class="grid md:grid-cols-3 gap-2 py-16 lg:py-32">
             @php
             $photos = App\Models\Post::where('kind', App\PostKind::PHOTO)->latest()->limit(6)->get();
             @endphp
@@ -61,7 +61,7 @@
                 latest articles
             </x-slot>
             <x-slot:contents class="bg-amber-200">
-                <section class="grid grid-cols-3 gap-2 py-32 lg:gap-8">
+                <section class="grid grid-cols-3 gap-2 py-16 lg:py-32 lg:gap-8">
                     @php
                     $articles = App\Models\Post::where('kind', App\PostKind::ARTICLE)->latest()->limit(3)->get();
                     @endphp
@@ -83,6 +83,7 @@
                 latest notes
             </x-slot>
             <x-slot:contents class="bg-rose-300">
+                <div class="py-16 lg:py-32">
                 @php
                 $photos = App\Models\Post::where('kind', App\PostKind::NOTE)->latest()->limit(3)->get();
                 @endphp
@@ -93,6 +94,7 @@
                 <x-dynamic-component :component="$componentName" :post="$post" />
 
                 @endforeach
+                </div>
             </x-slot>
         </x-bold-titled-wrapper>
         </div>

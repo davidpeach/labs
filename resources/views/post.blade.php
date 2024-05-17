@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="@container h-entry mx-automax-w-7xl">
+    <div class="@container h-entry mx-auto max-w-wide px-4 lg:px-8 py-16">
         @if($post->title)
         <h1 class='max-w-wide m-auto text-4xl md:text-4xl lg:text-7xl 2xl:text-[8rem]
             font-bold bottom-full leading-[2rem] lg:leading-[5rem] 2xl:leading-[8rem]

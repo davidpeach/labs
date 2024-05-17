@@ -1,4 +1,4 @@
-<div class="my-16 lg:my-32">
+<div class="mt-16 lg:mt-32">
 <x-bold-titled-wrapper titletag="'p'">
     <x-slot:title class="text-sky-200">
         tags
