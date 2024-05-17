@@ -20,7 +20,7 @@ class ListScrobbles extends Component
 
     public function render()
     {
-        return view('livewire.list-scrobbles');
+        return view(config('app.version').'.livewire.list-scrobbles');
     }
 
     #[On('echo:listens,FoundNowPlaying')]

@@ -13,7 +13,7 @@ class ArticleIndexController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('posts', [
+        return view(config('app.version').'.posts', [
             'posts' => Post::where('kind', PostKind::ARTICLE)->orderBy('published_at', 'desc')->paginate(10),
         ]);
     }

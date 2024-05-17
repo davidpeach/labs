@@ -12,11 +12,11 @@ use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view(config('app.version').'.welcome');
 })->name('home');
 
 Route::get('now', function () {
-    return view('now');
+    return view(config('app.version').'.now');
 })->name('now');
 
 Route::get('scrobble-count', function () {

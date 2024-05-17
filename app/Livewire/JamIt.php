@@ -20,7 +20,7 @@ class JamIt extends Component
 
     public function render()
     {
-        return view('livewire.jam-it');
+        return view(config('app.version').'.livewire.jam-it');
     }
 
     public function jam()

@@ -11,7 +11,7 @@ class JamIndexController extends Controller
     {
         $jams = Jam::orderBy('published_at', 'desc')->paginate(12);
 
-        return view('jams', [
+        return view(config('app.version').'.jams', [
             'jams' => $jams,
         ]);
     }

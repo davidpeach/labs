@@ -13,7 +13,7 @@ class TagShowController extends Controller
     {
         $posts = Post::withAnyTags($tag)->paginate(10);
 
-        return view('posts', [
+        return view(config('app.version').'.posts', [
             'posts' => $posts,
         ]);
     }

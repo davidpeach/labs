@@ -17,7 +17,7 @@ class NowListeningTo extends Component
 
     public function render()
     {
-        return view('livewire.now-listening-to');
+        return view(config('app.version').'.livewire.now-listening-to');
     }
 
     #[On('echo:listens,FoundNowPlaying')]
