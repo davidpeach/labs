@@ -10,7 +10,7 @@
     @livewireScripts()
 </head>
 
-<body class="bg-purple-200">
+<body>
     <div>
         <div>
             <x-site-nav-bar />
