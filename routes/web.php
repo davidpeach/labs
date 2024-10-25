@@ -9,10 +9,14 @@ use App\Http\Controllers\TagShowController;
 use App\Livewire\ListScrobbles;
 use App\Models\Listen;
 use App\Models\Post;
+use App\PostKind;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view(config('app.version').'.welcome');
+    return view(config('app.version').'.welcome', [
+        'articles' => Post::where('kind', PostKind::ARTICLE)->orderBy('published_at', 'desc')->paginate(10),
+        'notes' => Post::where('kind', PostKind::NOTE)->orderBy('published_at', 'desc')->paginate(5),
+    ]);
 })->name('home');
 
 Route::get('now', function () {
