@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use App\ArtistCreditType;
 use App\Events\FoundNowPlaying;
 use App\Http\Integrations\LastFm\LastFm;
-use App\Http\Integrations\LastFm\Requests\GetRecentTracks;
+use App\Http\Integrations\LastFm\Requests\GetOldTracks;
 use App\Models\Album;
 use App\Models\Artist;
 use App\Models\Listen;
@@ -13,41 +13,33 @@ use App\Models\Song;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 
-class ImportNewScrobblesCommand extends Command
+class ImportOldScrobblesCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:import-new-scrobbles';
+    protected $signature = 'app:import-old-scrobbles';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Import new scrobbles from LastFM';
+    protected $description = 'Import old scrobbles from LastFM';
 
     /**
      * Execute the console command.
      */
     public function handle()
     {
-        $latestListen = Listen::orderBy('started_at', 'desc')->first();
+        $earliestListen = Listen::orderBy('started_at', 'asc')->first();
 
         $lastFm = new LastFm();
-        $response = $lastFm->send(new GetRecentTracks(fromTimestamp: $latestListen?->started_at ?? 1));
+        $response = $lastFm->send(new GetOldTracks(toTimestamp: $earliestListen?->started_at ?? 1));
         $tracks = collect($response->json('recenttracks.track'));
-
         $tracks->each(function (array $track) {
-
-            if ((bool) data_get($track, '@attr.nowplaying') === true) {
-                Cache::put('now-listening', $track['name'].' by '.$track['artist']['#text'], now()->addMinutes(2));
-                FoundNowPlaying::dispatch();
-
-                return;
-            }
 
             $artist = Artist::firstOrCreate([
                 'name' => $track['artist']['#text'],

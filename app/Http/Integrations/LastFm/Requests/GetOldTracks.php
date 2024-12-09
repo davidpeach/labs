@@ -5,7 +5,7 @@ namespace App\Http\Integrations\LastFm\Requests;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 
-class GetRecentTracks extends Request
+class GetOldTracks extends Request
 {
     /**
      * The HTTP method of the request
@@ -13,7 +13,7 @@ class GetRecentTracks extends Request
     protected Method $method = Method::GET;
 
     public function __construct(
-        private ?int $fromTimestamp = null,
+        private ?int $toTimestamp = null,
     ) {
 
     }
@@ -35,8 +35,8 @@ class GetRecentTracks extends Request
             'limit' => config('services.lastfm.import_limit'),
         ];
 
-        if (! is_null($this->fromTimestamp)) {
-            $params['from'] = $this->fromTimestamp;
+        if (! is_null($this->toTimestamp)) {
+            $params['to'] = $this->toTimestamp;
         }
 
         return $params;

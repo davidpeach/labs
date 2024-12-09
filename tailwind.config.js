@@ -1,4 +1,8 @@
 /** @type {import('tailwindcss').Config} */
+import typography from '@tailwindcss/typography';
+import forms from '@tailwindcss/forms';
+import containerQueries from '@tailwindcss/container-queries';
+
 export default {
   content: [
     "./resources/**/*.blade.php",
@@ -18,9 +22,9 @@ export default {
         },
     },
   plugins: [
-        require('@tailwindcss/typography'),
-        require('@tailwindcss/forms'),
-        require('@tailwindcss/container-queries'),
+        typography,
+        forms,
+        containerQueries,
     ],
 }
 

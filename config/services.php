@@ -33,6 +33,9 @@ return [
     'lastfm' => [
         'api_key' => env('LASTFM_API_KEY', ''),
         'api_secret' => env('LASTFM_API_SECRET', ''),
+        'import_format' => env('LASTFM_IMPORT_FORMAT', 'json'),
+        'import_username' => env('LASTFM_IMPORT_USERNAME', ''),
+        'import_limit' => env('LASTFM_IMPORT_LIMIT', 50),
     ],
 
 ];
