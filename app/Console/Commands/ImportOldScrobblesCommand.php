@@ -37,9 +37,12 @@ class ImportOldScrobblesCommand extends Command
         $earliestListen = Listen::orderBy('started_at', 'asc')->first();
 
         $lastFm = new LastFm();
-        $response = $lastFm->send(new GetOldTracks(toTimestamp: $earliestListen?->started_at ?? 1));
+        $response = $lastFm->send(new GetOldTracks(toTimestamp: $earliestListen?->started_at ?? time()));
         $tracks = collect($response->json('recenttracks.track'));
         $tracks->each(function (array $track) {
+            if ((bool) data_get($track, '@attr.nowplaying') === true) {
+                return;
+            }
 
             $artist = Artist::firstOrCreate([
                 'name' => $track['artist']['#text'],

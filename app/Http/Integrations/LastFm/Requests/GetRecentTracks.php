@@ -32,7 +32,7 @@ class GetRecentTracks extends Request
             'api_key' => config('services.lastfm.api_key'),
             'format' => config('services.lastfm.import_format'),
             'user' => config('services.lastfm.import_username'),
-            'limit' => config('services.lastfm.import_limit'),
+            'limit' => (int) config('services.lastfm.import_limit'),
         ];
 
         if (! is_null($this->fromTimestamp)) {
