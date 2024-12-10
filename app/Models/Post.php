@@ -82,12 +82,12 @@ class Post extends Model implements HasMedia
 
     public function featured(): Attribute
     {
-        $firstImage = $this->getMedia('inline_images')->first();
+        $firstImage = $this->getMedia('featured_images')->first();
 
         if (is_null($firstImage)) {
             $url = null;
         } else {
-            $url = $firstImage->getUrl('preview');
+            $url = $firstImage->getUrl('square');
         }
 
         return Attribute::make(
@@ -113,10 +113,21 @@ class Post extends Model implements HasMedia
     {
         $this
             ->addMediaConversion('preview')
-            ->fit(Fit::Contain, 300, 300);
+            ->fit(Fit::Contain, 300, 300)
+            ->nonQueued();
 
         $this
             ->addMediaConversion('square')
-            ->crop(900, 900, CropPosition::Center);
+            ->crop(900, 900, CropPosition::Center)
+            ->nonQueued();
+    }
+
+    public function featuredImage(): Attribute
+    {
+        $image = $this->media->firstWhere(fn (Media $item) => $item->getCustomProperty('is_featured'));
+
+        return Attribute::make(
+            get: fn () => $image?->preview_url ?? '',
+        );
     }
 }

@@ -28,9 +28,19 @@ class PostResource extends Resource
             Section::make('Post Details')
                 ->columns(2)
                 ->schema([
+                    Forms\Components\TextInput::make('wp_id')
+                        ->numeric(),
+                    Forms\Components\TextInput::make('category_id')
+                        ->required()
+                        ->numeric(),
+                    Forms\Components\TextInput::make('user_id')
+                        ->required()
+                        ->numeric(),
                     Forms\Components\TextInput::make('title')
                         ->maxLength(255),
                     Forms\Components\TextInput::make('slug')
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('wp_url')
                         ->maxLength(255),
                     Forms\Components\Select::make('kind')
                         ->options(PostKind::class)
@@ -48,6 +58,12 @@ class PostResource extends Resource
                     Forms\Components\Textarea::make('content')
                         ->columnSpanFull()
                         ->rows(10),
+                    Forms\Components\TextInput::make('format')
+                        ->required()
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('status')
+                        ->required()
+                        ->maxLength(255),
                 ])
                 ->collapsible(),
             Section::make('Images')
@@ -55,6 +71,8 @@ class PostResource extends Resource
                     SpatieMediaLibraryFileUpload::make('inline_images')
                         ->multiple()
                         ->collection('inline_images'),
+                    SpatieMediaLibraryFileUpload::make('featured_image')
+                        ->collection('featured_images'),
                 ])
                 ->collapsible()
                 ->collapsed(),
