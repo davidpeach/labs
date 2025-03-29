@@ -109,6 +109,11 @@ class Post extends Model implements HasMedia
         return $this->belongsTo(Category::class);
     }
 
+    public function game(): BelongsTo
+    {
+        return $this->belongsTo(Game::class);
+    }
+
     public function registerMediaConversions(?Media $media = null): void
     {
         $this
@@ -129,5 +134,10 @@ class Post extends Model implements HasMedia
         return Attribute::make(
             get: fn () => $image?->preview_url ?? '',
         );
+    }
+
+    public function displayContentForAdminTable()
+    {
+        return 'foo';
     }
 }

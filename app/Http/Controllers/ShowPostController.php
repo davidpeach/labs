@@ -12,7 +12,7 @@ class ShowPostController extends Controller
             abort(404);
         }
 
-        return view(config('app.version').'.post', [
+        return view(config('app.version').'.kinds.' . $kind . '.post', [
             'post' => $post,
         ]);
     }

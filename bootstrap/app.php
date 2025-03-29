@@ -22,6 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
             $current = explode('/', $current);
             $current = end($current);
             $found = Post::where('slug', 'like', '%'.$current)->first();
+            // dd($found);
 
             if (! $found) {
                 return redirect('/', 301);

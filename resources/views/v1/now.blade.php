@@ -1,17 +1,14 @@
 <x-layout>
-    <div class="@container">
-        <x-paragraph>
+    <div>
+        <p>
             This is my NOW page
-        </x-paragraph>
-
-        <x-paragraph>
+        </p>
+        <p>
             <ul>
                 <li>Building: this website</li>
                 <li>Working: Get Laid Beds</li>
                 <li>Watching: Final series of Inside Number 9 😢</li>
             </ul>
-        </x-paragraph>
-
-
+        </p>
     </div>
 </x-layout>

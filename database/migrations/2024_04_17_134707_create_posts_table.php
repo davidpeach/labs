@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedInteger('wp_id')->nullable();
             $table->unsignedInteger('category_id');
+            $table->unsignedInteger('game_id')->nullable();
             $table->unsignedInteger('user_id');
             $table->string('title')->nullable();
             $table->string('slug');

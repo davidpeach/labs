@@ -28,4 +28,9 @@ class ListScrobbles extends Component
     {
         unset($this->listens);
     }
+
+    public function paginationView()
+    {
+        return config('app.version') . '.partials.pagination';
+    }
 }

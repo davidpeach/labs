@@ -10,17 +10,15 @@
     @livewireScripts()
 </head>
 
-<body class="bg-purple-200">
+<body>
     <div>
         <div>
             <x-site-nav-bar />
 
             <x-site-header />
 
-            {{-- <main class="px-4 sm:px-6 lg:px-8 py-16  max-w-wide m-auto"> --}}
             <main>
                 {{ $slot }}
-
             </main>
             <x-tag-cloud />
             <x-site-footer />

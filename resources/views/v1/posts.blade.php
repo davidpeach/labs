@@ -1,5 +1,5 @@
 <x-layout>
-<div class="mx-auto max-w-wide px-4 lg:px-8">
+<div>
 <x-page-title :title="$posts->first()?->kind->getLabel() . 's'" />
 @foreach($posts as $post)
 @php

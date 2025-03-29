@@ -1,13 +1,13 @@
-<div class="mt-16 lg:mt-32">
+<div>
 <x-bold-titled-wrapper titletag="'p'">
-    <x-slot:title class="text-sky-200">
+    <x-slot:title>
         tags
     </x-slot>
-    <x-slot:contents class="bg-sky-200 ">
-        <ul class="leading-10 text-sm lg:text-xl py-16 uppercase tracking-wide">
+    <x-slot:contents>
+        <ul>
             @foreach($tags as $tag)
-            <li class="inline-block my-2 lg:my-2 lg:mx-1">
-                <a href="{{ route('tag.show', $tag) }}" class="bg-yellow-100 py-1 px-2 lg:py-2 lg:px-4 inline-block hover:bg-yellow-400">{{ $tag->name }}</a>
+            <li>
+                <a href="{{ route('tag.show', $tag) }}">{{ $tag->name }}</a>
             </li>
             @endforeach
         </ul>
